@@ -1,0 +1,1 @@
+This is the git repo for Alex Stout's work related to Launch School course JS230.
