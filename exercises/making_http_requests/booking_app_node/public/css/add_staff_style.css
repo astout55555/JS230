@@ -1,0 +1,11 @@
+label {
+  color: red;
+  font-weight: bold;
+}
+
+form #add_staff_submit {
+  background-color: red;
+  width: 100px;
+  height: 50px;
+  color: white;
+}

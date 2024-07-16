@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- linthtml-disable -->
+<html>
+  <head>
+    <title>Book a Schedule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/booking_time_slots_style.css" rel="stylesheet" media="screen">
+    <script src="javascripts/booking_time_slots_FE.js"></script>
+  </head>
+  <body>
+    <h1>Schedules</h1>
+    <form id="booking_form">
+      <label for="schedule_selector">Please select one schedule</label>
+      <select id="schedule_selector" name="id">
+        <!--options are provided by JS-->
+      </select>
+      <label for="student_email">Email:</label>
+      <input type="email" id="student_email" name="student_email">
+      <button id="booking_form_submit" type="submit">Book</button>
+    </form>
+
+    <div id="add_student_hidden_block" hidden>
+      <h1>Please provide new student details</h1>
+      <form id="add_student_form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <label for="booking_sequence">Booking Sequence:</label>
+        <input type="number" id="booking_sequence" name="booking_sequence">
+        <button id="add_student_form_submit" type="submit">Submit</button>
+      </form>
+    </div>
+  </body>  
+</html>

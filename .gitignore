@@ -6,5 +6,8 @@ practice_probs/
 .stylelintrc.json
 js_run.html
 notes/
-exercises/
+exercises/dom_traversing_querying_manipulation/
+exercises/events_async_programming/
 test_page_style.css
+working_with_web_apis/
+areas_of_continents_node/

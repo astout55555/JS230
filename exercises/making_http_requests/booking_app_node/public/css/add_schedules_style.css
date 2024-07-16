@@ -1,0 +1,14 @@
+#schedule_form_maker_submit {
+  background-color: blue;
+  color: white;
+}
+
+label {
+  color: red;
+  font-weight: bold;
+}
+
+#add_staff_schedules_submit {
+  background-color: red;
+  color: white;
+}

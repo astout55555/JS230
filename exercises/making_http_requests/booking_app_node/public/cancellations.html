@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- linthtml-disable -->
+<html>
+  <head>
+    <title>Delete a Booking or Schedule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="javascripts/cancellations.js"></script>
+  </head>
+  <body>
+    <h1>Delete a Schedule</h1>
+    <form id="schedule-delete-form">
+      <label for="schedule-selector">Please select one schedule</label>
+      <select id="schedule-selector" name="id">
+        <!--options provided by JS-->
+      </select>
+      <button id="schedule-delete-button" type="submit">Delete Schedule</button>
+    </form>
+
+    <h1>Delete a Booking</h1>
+    <form id="booking-cancellation-form">
+      <label for="booking-selector">Please select one booking</label>
+      <select id="booking-selector" name="id">
+        <!--options provided by JS-->
+      </select>
+      <button id="booking-cancellation-button">Cancel Booking</button>
+    </form>
+  </body>  
+</html>

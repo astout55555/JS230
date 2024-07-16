@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- linthtml-disable -->
+<html>
+  <head>
+    <title>Add Staff Schedules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="css/add_schedules_style.css" rel="stylesheet" media="screen">
+    <script src="javascripts/adding_schedules.js"></script>
+  </head>
+  <body>
+    <form id="schedule_form_maker">
+      <button id="schedule_form_maker_submit" type="submit">Add more schedules</button>
+    </form>
+    <form id="add_staff_schedules_to_db">
+      <!-- incrememt all numbers with each fieldset added -->
+      <fieldset name="Schedule 1">
+        <legend>Schedule 1</legend>
+        <dl>
+          <dt>
+            <label for="staff_name_1">Staff Name:</label>
+          </dt>
+          <dd>
+            <select id="staff_name_1" name="staff_name_1">
+              <!--options are added in JavaScript-->
+            </select>
+          </dd>
+          <dt>
+            <label for="date_1">Date:</label>
+          </dt>
+          <dd>
+            <input id="date_1" name="date_1" type="text" placeholder="mm-dd-yy">
+          </dd>
+          <dt>
+            <label for="time_1">Time:</label>
+          </dt>
+          <dd>
+            <input id="time_1" name="time_1" type="text" placeholder="hh:mm">
+          </dd>
+        </dl>
+      </fieldset>
+      <button id="add_staff_schedules_submit" type="submit">Add schedule(s)</button>
+    </form>
+  </body>  
+</html>
