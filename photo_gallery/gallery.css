@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  font: normal 16px Helvetica, Arial, sans-serif;
+  color: #f0f0f0;
+  background: #151515;
+}
+
+main {
+  display: block;
+  max-width: 1000px;
+  min-width: 600px;
+  padding: 25px 20px 20px;
+  margin: 0 auto;
+  background: #333;
+}
+
+h1 { text-align: center; }
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+figure {
+  padding: 0 0 30px;
+  margin: 0;
+}
+
+figure img {
+  border: 15px solid #fff;
+}
+
+figcaption {
+  display: block;
+  padding: 10px 0 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0 -15px;
+  font-size: 0;
+}
+
+li {
+  display: inline-block;
+  width: 25%;
+  padding: 0 15px;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+li img {
+  border: 3px solid #fff;
+}
+
+.active {
+  border: 2px solid blue;
+}
