@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alex's Practice Project</title>
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/handlebars.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="/" id="home">My Contact Manager App (Home)</a>
+      </h1>
+      <button id="add-form-unveiler" class="add-form-toggler">Add Contact</button>
+      <form id="add-contact-form" class="veiled-form">
+        <label for="add-contact-name">Name:
+          <input id="add-contact-name" name="full_name" type="text">
+        </label>
+        <label for="add-contact-phone">Phone:
+          <input id="add-contact-phone" name="phone_number" type="number">
+        </label>
+        <label for="add-contact-email">Email:
+          <input id="add-contact-email" name="email" type="email">
+        </label>
+        <label for="add-contact-tags">Tags
+          <select id="add-contact-tags" name="tags" multiple>
+          </select>
+        </label>
+        <button class="add-form-toggler" type="button">Cancel</button>
+        <button id="add-contact-submit" type="submit">Add Contact</button>
+      </form>
+      <form id="create-tag-form">
+        <input id="tag-name" name="name" type="text" placeholder="Tag name">
+        <button type="submit">Create Tag</button>
+      </form>
+      <form id="search-form">
+        <input id="search-bar" type="text" placeholder="Contact name">
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <main>
+      <section>
+        <h2>Filter by Tag:</h2>
+        <ul id="tags-list">
+        </ul>
+      </section>
+      <section>
+        <h2>Contacts:</h2>
+        <div id="contacts-list">
+        </div>
+      </section>
+    </main>
+    <!-- linthtml-disable id-class-style -->
+    <script id="tagFilters" type="text/x-handlebars">
+      {{#each tagFilters}}
+        {{>tagFilter}}
+      {{/each}}
+    </script>
+    <script id="tagOptions" type="text/x-handlebars">
+      {{#each tagOptions}}
+        {{>tagOption}}
+      {{/each}}
+    </script>
+    <script id="tagFilter" data-type="partial" type="text/x-handlebars">
+      <li>
+        <button>{{tagName}}</button>
+      </li>
+    </script>
+    <script id="tagOption" data-type="partial" type="text/x-handlebars">
+      <option value="{{tagName}}">{{tagName}}</option>
+    </script>
+    <script id="contacts" type="text/x-handlebars">
+      {{#unless contacts}}
+        <h3>No contacts found</h3>
+      {{/unless}}
+      {{#each contacts}}
+        {{>contact}}
+      {{/each}}
+    </script>
+    <script id="contact" data-type="partial" type="text/x-handlebars">
+      <div id="contact-div-{{id}}">
+        <h3>{{full_name}}</h3>
+        <p>
+          <strong>Phone Number:</strong>
+          {{phone_number}}
+        </p>
+        <p>
+          <strong>Email:</strong>
+          {{email}}
+        </p>
+        <p>
+          <strong>Tags:</strong>
+          {{tags}}
+        </p>
+        <button id="edit-form-unveiler-{{id}}" data-id="{{id}}" class="edit-form-unveiler">
+          Edit
+        </button>
+        {{>editContactForm}}
+        <button id="delete-contact-button-{{id}}" data-id="{{id}}" class='contact-deleter'>
+          DELETE
+        </button>
+      </div>
+    </script>
+    <script id="editContactForm" data-type="partial" type="text/x-handlebars">
+      <form id="edit-contact-form-{{id}}" data-id="{{id}}" class="veiled-form edit-contact-form">
+        <label for="edit-contact-name-{{id}}">Name:
+          <input id="edit-contact-name-{{id}}" name="full_name" type="text"
+            value="{{full_name}}">
+        </label>
+        <label for="edit-contact-phone-{{id}}">Phone:
+          <input id="edit-contact-phone-{{id}}" name="phone_number" type="number"
+            value="{{phone_number}}">
+        </label>
+        <label for="edit-contact-email-{{id}}">Email:
+          <input id="edit-contact-email-{{id}}" name="email" type="email"
+            value="{{email}}">
+        </label>
+        <label for="edit-contact-tags-{{id}}">Tags:
+          <select id="edit-contact-tags-{{id}}" name="tags" multiple>
+            {{#each tagOptions}}
+        <!-- I wanted to dynamically have each contact's tags pre-selected -->
+        <!-- {{#if isContactTag tagName id}}
+                <option value="{{tagName}}" selected>{{tagName}}</option>
+              {{else}} --> <!-- this wasn't working, but maybe on the right track?-->
+                {{>tagOption}}
+              <!-- {{/if}} -->
+            {{/each}}
+          </select>
+        </label>
+        <button id="edit-contact-submit-{{id}}" type="submit">Edit Contact</button>
+      </form>
+    </script>
+  </body>
+</html>
