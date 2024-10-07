@@ -120,19 +120,20 @@
             value="{{email}}">
         </label>
         <label for="edit-contact-tags-{{id}}">Tags:
-          <select id="edit-contact-tags-{{id}}" name="tags" multiple>
-            {{#each tagOptions}}
-        <!-- I wanted to dynamically have each contact's tags pre-selected -->
-        <!-- {{#if isContactTag tagName id}}
-                <option value="{{tagName}}" selected>{{tagName}}</option>
-              {{else}} --> <!-- this wasn't working, but maybe on the right track?-->
-                {{>tagOption}}
-              <!-- {{/if}} -->
-            {{/each}}
+          <select id="edit-contact-tags-{{id}}" data-contactTags="{{tags}}" name="tags" multiple>
           </select>
         </label>
         <button id="edit-contact-submit-{{id}}" type="submit">Edit Contact</button>
       </form>
+    </script>
+    <script id="editTagOptions" type="text/x-handlebars">
+      {{#each allTags}}
+        {{#if (isContactTag tagName ../contactTags)}}
+          <option value="{{tagName}}" selected>{{tagName}}</option>
+        {{else}}
+          {{>tagOption}}
+        {{/if}}
+      {{/each}}
     </script>
   </body>
 </html>

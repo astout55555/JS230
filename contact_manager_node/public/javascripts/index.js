@@ -2,25 +2,16 @@
 
 /*
 
-Remaining (optional) problem:
-  I'd like edit form tags select element to default to selecting any pre-existing
-  tags for the contact. That way submitting the edit form without making changes
-  will not change the tags for the contact (like other data, it stays the same).
+Notes for refactor:
 
-(Also, if this were the assessment, I'd want to refactor and improve organization.)
+Given how much of the features are complicated by the inclusion of the tags,
+using a TagManager as a collaborator object for the ContactManager would be a good
+way to divide up responsibilities.
 
-Data notes:
-  -tags are not stored on server, must be tracked by contact manager instance
-  -tags are objects stored in an array (this.allTags)
-    -each tag object is a simple {tagName: valueString}
-      -this makes it easier to display tag names in handlebars template
-  -because tags are not stored in server, they are lost on page refreshes
-    unless used by a contact, in which case the tag list includes it.
-    -this means that tags will automatically be removed upon refresh when
-      removed from the final contact using it, during editing or deletion
-      -and, if you try to filter with it, it will display "no contacts found"
-        -seems good enough for my purposes
-  -tag selections are optional--choosing none means contact tags value is null
+Tags are not stored on the server as a separate table, so to get the full list of
+tags used across all contacts I have to track that list myself. Right now the
+responsibility for tracking that is held by the ContactManager, but I could shift
+that to the TagManager.
 
 */
 
@@ -35,17 +26,15 @@ $(() => {
     Handlebars.registerPartial(tmpl["id"], tmpl["innerHTML"]);
   });
 
-  // Handlebars.registerHelper('isContactTag', (tagName, contactID) => {
-    // // fetch won't work to compare contact tags with tagName
-    // // (async interacting with sync code), and very slow besides
-    // // (1 fetch per tag option). could I fetch once for the contact
-    // // somewhere else, use that data to check for matches, and
-    // // somehow pass that info to the handlebars with the rest of the context?
-  // });
+  // remember to use () around the helper and its params!
+  // otherwise handlebars doesn't know it's a sub-expression
+  Handlebars.registerHelper('isContactTag', (tagName, contactTags) => {
+    return contactTags.split(',').includes(tagName);
+  });
 
   class ContactManager {
     constructor() { // initialize properties and display, add event listeners
-      this.allTags = []; // server does not track list of tags, so I have to
+      this.allTags = [];
 
       this.#initializeDisplay();
 
@@ -91,7 +80,6 @@ $(() => {
 
       $('#add-contact-form').on('submit', event => {
         event.preventDefault();
-        // this.addContact($('#add-contact-form'));
         this.addContact(new FormData(event.target));
         event.target.reset();
         this.toggleAdd();
@@ -173,7 +161,14 @@ $(() => {
     }
 
     populateTagOptions($selectElement) {
-      $selectElement.html(templates.tagOptions({tagOptions: this.allTags}));
+      if ($selectElement.attr('data-contactTags')) {
+        $selectElement.html(templates.editTagOptions({
+            allTags: this.allTags,
+            contactTags: $selectElement.attr('data-contactTags'),
+        }));
+      } else {
+        $selectElement.html(templates.tagOptions({tagOptions: this.allTags}));
+      }
     }
 
     toggleAdd() {
